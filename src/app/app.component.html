@@ -1,44 +1,11 @@
 <!-- <input type="text" [(ngModel)]="newItem" placeholder="Yeni öğe..."> -->
 
 
-
-<div class="example-container ">
-  <mat-form-field class="example-form-field  ">
-    <mat-label>New Item</mat-label>
-    <input matInput type="text" [(ngModel)]="newItem">
-    <button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
-      <mat-icon>close</mat-icon>
-    </button>
-  </mat-form-field>
-  <button mat-raised-button color="accent" (click)="addNewItem()">Accent</button>
-  <h2>To do</h2> 
- 
-  <div
-    cdkDropList
-    #todoList="cdkDropList"
-    [cdkDropListData]="todo"
-    [cdkDropListConnectedTo]="[doneList]"
-    class="example-list"
-    (cdkDropListDropped)="drop($event)">
-    <div class="example-box" *ngFor="let item of todo" cdkDrag>{{item}}</div>
-  </div>
-
-
+<div *ngFor="let item of AllArray">
+  <app-column [ifState]=true [AllArray]="AllArray" [(ngModel)] = "newItem"></app-column>
 </div>
 
-<div class="example-container">
-  <h2>Done</h2>
 
-  <div
-    cdkDropList
-    #doneList="cdkDropList"
-    [cdkDropListData]="done"
-    [cdkDropListConnectedTo]="[todoList]"
-    class="example-list"
-    (cdkDropListDropped)="drop($event)">
-    <div class="example-box" *ngFor="let item of done" cdkDrag>{{item}}</div>
-  </div>
-</div>
 
 
 

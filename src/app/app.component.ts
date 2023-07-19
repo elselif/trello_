@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import {NgFor} from '@angular/common';
 import {
   CdkDragDrop,
@@ -7,29 +7,61 @@ import {
   CdkDrag,
   CdkDropList,
 } from '@angular/cdk/drag-drop';
+import { ListArray, ListItem } from './model/ListArray';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-  title = 'todo-list';
-  todo = ['Get to work', 'Pick up groceries', 'Go home', 'Fall asleep'];
+export class AppComponent implements OnInit {
 
-  done = ['Get up', 'Brush teeth', 'Take a shower', 'Check e-mail', 'Walk dog'];
-  newItem: string = '';
+
+  ngOnInit(): void {
+    this.addNewDiv()
+  }
+
+  title = 'todo-list';
+  // todo = ['Get to work', 'Pick up groceries', 'Go home', 'Fall asleep'];
+  // done = ['Get up', 'Brush teeth', 'Take a shower', 'Check e-mail', 'Walk dog'];
+
+  todo : ListArray = {
+    columnTitle : 'TO-DO',
+    array : [
+      {
+        title : 'Projeyi yap',
+      },
+      {
+        title : 'Projeyi yapma',
+      },
+    ]
+  }
+
+  done : ListArray = {
+    columnTitle : 'TO-DO',
+    array : [
+      {
+        title : 'Projeyi yaptım',
+      },
+      {
+        title : 'Projeyi yapmadım',
+      },
+    ]
+  }
+
+  newItem: ListItem = {
+    title : ''
+  }
   value = 'Clear me';
+  AllArray : ListArray[] = [];
 
   exampleContainers: any[] = []; // Yeni blokları saklamak için dizi
 
   addNewDiv() :void {
-    const newContainer = {
-      todoList: [],
-      doneList: []
-    };
 
-    this.exampleContainers.push(newContainer);
+    this.AllArray.push(this.todo);
+    this.AllArray.push(this.done);
+
   }
 
 
@@ -47,11 +79,11 @@ export class AppComponent {
     }
   }
 
-  
+
   addNewItem() {
     if (this.newItem) {
-      this.todo.push(this.newItem);
-      this.newItem = ''; // Input alanını sıfırla
+      this.todo.array.push(this.newItem);
+      this.newItem.title = ''; // Input alanını sıfırla
     }
   }
 }
