@@ -52,7 +52,7 @@ export class ColumnComponent implements OnInit {
     };
     this.Column.array.push(tempItem);
     this.title = '';
-    this.localSercive.savetoLocal(this.title);
+    this.localSercive.savetoLocal(this.AllArray);
   }
   deleteItem(itemTitleToDelete: string) {
     // Silinecek öğenin indeksini buluyoruz
