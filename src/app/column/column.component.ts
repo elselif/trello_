@@ -5,6 +5,7 @@ import {
 } from '@angular/cdk/drag-drop';
 import { Component, Input, OnInit } from '@angular/core';
 import { Column, ListItem } from '../model/ListArray';
+import { LocalServiceService } from '../service/localService.service';
 
 @Component({
   selector: 'app-column',
@@ -12,13 +13,15 @@ import { Column, ListItem } from '../model/ListArray';
   styleUrls: ['./column.component.css'],
 })
 export class ColumnComponent implements OnInit {
-  constructor() {}
+  constructor(private localSercive : LocalServiceService) {}
   title: string = '';
   editingTitle: string;
   isEditing: boolean;
 
   @Input() allTitle: string[] = [];
-  ngOnInit() {}
+  ngOnInit() {
+
+  }
 
   @Input() ifState: boolean = false;
   @Input() Column: Column;
@@ -39,6 +42,7 @@ export class ColumnComponent implements OnInit {
         event.currentIndex
       );
     }
+    this.localSercive.savetoLocal(this.AllArray);
   }
 
   addNewItem() {
@@ -48,6 +52,7 @@ export class ColumnComponent implements OnInit {
     };
     this.Column.array.push(tempItem);
     this.title = '';
+    this.localSercive.savetoLocal(this.title);
   }
   deleteItem(itemTitleToDelete: string) {
     // Silinecek öğenin indeksini buluyoruz
@@ -57,23 +62,27 @@ export class ColumnComponent implements OnInit {
     if (indexToDelete !== -1) {
       this.Column.array.splice(indexToDelete, 1);
     }
+
   }
 
    editItem(item: ListItem) {
     item.editingTitle = item.title; // Başlangıçta düzenleme alanını mevcut başlıkla doldur
     item.isEditing = true; // Düzenleme moduna geç
     this.ifState = true ;
+
   }
 
   updateItem(item: ListItem) {
     item.title = item.editingTitle || ''; // Başlığı güncelle
     item.isEditing = false; // Düzenleme modunu kapat
     item.editingTitle = ''; // Düzenleme alanını sıfırla
+
   }
 
   cancelUpdate(item: ListItem) {
     item.isEditing = false; // Düzenleme modunu iptal et
     item.editingTitle = ''; // Düzenleme alanını sıfırla
+
   }
 
 }

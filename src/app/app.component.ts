@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 import { Column, ListItem } from './model/ListArray';
+import { LocalServiceService } from './service/localService.service';
 
 @Component({
   selector: 'app-root',
@@ -8,10 +9,21 @@ import { Column, ListItem } from './model/ListArray';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
+
+  constructor(private localSercive : LocalServiceService) { }
+
   ngOnInit(): void {
-    this.initAllArray();
+
+    let returnedData = this.localSercive.getFromLocal();
+    if(returnedData.length<0)
+    {
+      this.initAllArray();
+    }else {
+      this.AllArray = returnedData;
+    }
     this.initAllTitles();
   }
+
   allTitle: string[] = [];
   columnTitle: string = '';
 
@@ -52,6 +64,8 @@ export class AppComponent implements OnInit {
   initAllArray(): void {
     this.AllArray.push(this.todo);
     this.AllArray.push(this.done);
+    this.localSercive.savetoLocal(this.AllArray);
+
   }
 
   createNewColumn() {
@@ -62,12 +76,16 @@ export class AppComponent implements OnInit {
 
     this.columnTitle = '';
     this.AllArray.push(tempColumn);
+    this.localSercive.savetoLocal(this.AllArray);
     this.initAllTitles();
+
   }
 
   initAllTitles() {
     this.AllArray.forEach((e) => {
       this.allTitle.push(e.columnTitle);
     });
+    this.localSercive.savetoLocal(this.AllArray);
+
   }
 }
