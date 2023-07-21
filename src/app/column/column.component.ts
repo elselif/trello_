@@ -1,51 +1,79 @@
-import { CdkDragDrop, moveItemInArray,
-  transferArrayItem, } from '@angular/cdk/drag-drop';
+import {
+  CdkDragDrop,
+  moveItemInArray,
+  transferArrayItem,
+} from '@angular/cdk/drag-drop';
 import { Component, Input, OnInit } from '@angular/core';
-import { ListArray, ListItem } from '../model/ListArray';
+import { Column, ListItem } from '../model/ListArray';
 
 @Component({
   selector: 'app-column',
   templateUrl: './column.component.html',
-  styleUrls: ['./column.component.css']
+  styleUrls: ['./column.component.css'],
 })
 export class ColumnComponent implements OnInit {
+  constructor() {}
+  title: string = '';
+  editingTitle: string;
+  isEditing: boolean;
 
-  newItem: ListItem = {
-    title : ''
-  }
+  @Input() allTitle: string[] = [];
+  ngOnInit() {}
 
-  value = 'Clear me';
-  constructor() { }
+  @Input() ifState: boolean = false;
+  @Input() Column: Column;
+  @Input() AllArray: Column[];
 
-  ngOnInit() {
-  }
-
-  @Input() ifState : boolean = false
-  @Input() ListArray : ListArray
-  @Input() AllArray : any
-  @Input() title : string =''
-
-
-
-  drop(event: CdkDragDrop<any>) {
+  drop(event: CdkDragDrop<Column>) {
     if (event.previousContainer === event.container) {
-      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+      moveItemInArray(
+        event.container.data.array,
+        event.previousIndex,
+        event.currentIndex
+      );
     } else {
       transferArrayItem(
-        event.previousContainer.data,
-        event.container.data,
+        event.previousContainer.data.array,
+        event.container.data.array,
         event.previousIndex,
-        event.currentIndex,
+        event.currentIndex
       );
     }
   }
 
   addNewItem() {
-    if (this.newItem) {
-      this.ListArray.array.push(this.newItem);
-      this.newItem.title = ''; // Input alanını sıfırla
+    let tempItem: ListItem = {
+      title: this.title,
+
+    };
+    this.Column.array.push(tempItem);
+    this.title = '';
+  }
+  deleteItem(itemTitleToDelete: string) {
+    // Silinecek öğenin indeksini buluyoruz
+    const indexToDelete = this.Column.array.findIndex((item) => item.title === itemTitleToDelete);
+
+    // Eğer böyle bir öğe varsa siliyoruz
+    if (indexToDelete !== -1) {
+      this.Column.array.splice(indexToDelete, 1);
     }
   }
 
+   editItem(item: ListItem) {
+    item.editingTitle = item.title; // Başlangıçta düzenleme alanını mevcut başlıkla doldur
+    item.isEditing = true; // Düzenleme moduna geç
+    this.ifState = true ;
+  }
+
+  updateItem(item: ListItem) {
+    item.title = item.editingTitle || ''; // Başlığı güncelle
+    item.isEditing = false; // Düzenleme modunu kapat
+    item.editingTitle = ''; // Düzenleme alanını sıfırla
+  }
+
+  cancelUpdate(item: ListItem) {
+    item.isEditing = false; // Düzenleme modunu iptal et
+    item.editingTitle = ''; // Düzenleme alanını sıfırla
+  }
 
 }

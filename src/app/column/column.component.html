@@ -1,24 +1,74 @@
-
 <div class="example-container ">
-  <mat-form-field class="example-form-field  ">
-    <mat-label>New Item</mat-label>
-    <input matInput type="text" [(ngModel)]="newItem">
-    <button *ngIf="ifState" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
-      <mat-icon>close</mat-icon>
-    </button>
-  </mat-form-field>
-  <button mat-raised-button color="accent" (click)="addNewItem()">Accent</button>
-  <h2>{{title}}</h2>
+
+
+  <h2>{{ Column.columnTitle }}</h2>
 
   <div
     cdkDropList
-    #todoList="cdkDropList"
-    [cdkDropListData]="ListArray"
-    [cdkDropListConnectedTo]="AllArray"
+    [id]="Column.columnTitle"
+    [cdkDropListData]="Column"
     class="example-list"
-    (cdkDropListDropped)="drop($event)">
-    <div class="example-box" *ngFor="let item of ListArray.array" cdkDrag>{{item}}</div>
+    (cdkDropListDropped)="drop($event)"
+    [cdkDropListConnectedTo]="allTitle"
+  >
+    <div class="example-box" *ngFor="let item of Column.array" cdkDrag>
+      <input type="text" [(ngModel)]="item.editingTitle" [hidden]="!item.isEditing" />
+    <span *ngIf="!item.isEditing">{{ item.title }}</span>
+
+
+    <div class="mx-auto align-items-end">
+      <button
+        *ngIf="ifState"
+        matSuffix
+        mat-icon-button
+        aria-label="Edit"
+        class=""
+        [hidden]="item.isEditing"
+        (click)="editItem(item)"
+      >
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button
+        *ngIf="ifState"
+        matSuffix
+        mat-icon-button
+        aria-label="Update"
+        class=""
+        [hidden]="!item.isEditing"
+        (click)="updateItem(item)"
+      >
+        <mat-icon>done</mat-icon>
+      </button>
+      <button
+        *ngIf="ifState"
+        matSuffix
+        mat-icon-button
+        aria-label="Clear"
+        class=""
+        [hidden]="!item.isEditing"
+        (click)="cancelUpdate(item)"
+      >
+        <mat-icon>clear</mat-icon>
+      </button>
+      <button
+        *ngIf="ifState"
+        matSuffix
+        mat-icon-button
+        aria-label="Delete"
+        class=""
+        (click)="deleteItem(item.title)"
+      >
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
   </div>
+    <div class="mx-3 flex">
+      <input matInput type="text" [(ngModel)]="title" placeholder="Add New Item" (keyup.enter)="addNewItem()"/>
 
 
+
+
+    </div>
+
+  </div>
 </div>

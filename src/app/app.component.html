@@ -1,11 +1,31 @@
-<!-- <input type="text" [(ngModel)]="newItem" placeholder="Yeni öğe..."> -->
+<div style="display: grid; align-items: center" >
+  <div>
+    <mat-form-field class="example-form-field">
+      <mat-label>New Column</mat-label>
+      <input matInput type="text" [(ngModel)]="columnTitle" />
+      <button matSuffix mat-icon-button aria-label="Clear" >
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+    <button mat-raised-button color="accent" (click)="createNewColumn()">
+      Accent
+    </button>
+  </div>
 
+  <div
 
-<div *ngFor="let item of AllArray">
-  <app-column [ifState]=true [AllArray]="AllArray" [(ngModel)] = "newItem"></app-column>
+    class="grid grid-cols-2 flex row aling-items-center	"
+  >
+    <div
+      *ngFor="let item of AllArray; let i = index"
+      style="display: flex; flex-direction: column; margin: 0 50px"
+    >
+      <app-column
+        [ifState]="true"
+        [AllArray]="AllArray"
+        [Column]="AllArray[i]"
+        [allTitle]="allTitle"
+      ></app-column>
+    </div>
+  </div>
 </div>
-
-
-
-
-

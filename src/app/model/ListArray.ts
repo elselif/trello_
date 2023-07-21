@@ -1,12 +1,11 @@
-export interface ListArray
-{
-  columnTitle : string ,
-  array : ListItem[]
-
+export interface Column {
+  columnTitle: string;
+  array: ListItem[];
 }
 
-export interface ListItem
-{
-  title : string ,
-  description? : string ,
+export interface ListItem {
+  title: string;
+  description?: string;
+  editingTitle? : string;
+  isEditing? : boolean;
 }
