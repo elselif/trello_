@@ -16,15 +16,13 @@ savetoLocal(data:any)
   localStorage.setItem('allArray',kaydedilecek);
 }
 
-getFromLocal():Column[]
-{
+  getFromLocal(): Column[] {
+    let item = localStorage.getItem('allArray');
 
-  let item = localStorage.getItem('AllArray');
+    if (item) {
 
-  if(item)
-  {
     let parsedItem = JSON.parse(item);
-    
+      return parsedItem;
   }
 
 

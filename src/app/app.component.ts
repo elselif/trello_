@@ -15,7 +15,7 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
 
     let returnedData = this.localSercive.getFromLocal();
-    if(returnedData.length<0)
+    if(returnedData.length<=0)
     {
       this.initAllArray();
     }else {
