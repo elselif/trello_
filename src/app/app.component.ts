@@ -1,7 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 
-import { Column, ListItem } from './model/ListArray';
+import { Board, Column, ListItem } from './model/ListArray';
 import { LocalServiceService } from './service/localService.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +11,11 @@ import { LocalServiceService } from './service/localService.service';
 })
 export class AppComponent implements OnInit {
 
-  constructor(private localSercive : LocalServiceService) { }
+  constructor(private localSercive : LocalServiceService,private router : Router) {}
+
+
+
+
 
   ngOnInit(): void {
 
@@ -26,6 +31,7 @@ export class AppComponent implements OnInit {
 
   allTitle: string[] = [];
   columnTitle: string = '';
+  boardTitle : string = '';
 
   todo: Column = {
     columnTitle: 'TO-DO',
@@ -47,6 +53,7 @@ export class AppComponent implements OnInit {
     columnTitle: 'Doing',
     array: [
       {
+
         title: 'Projeyi yaptim',
         editingTitle : '',
   isEditing : false
@@ -59,7 +66,12 @@ export class AppComponent implements OnInit {
     ],
   };
 
+
+
+
+
   AllArray: Column[] = [];
+  AllBoard : Board[] = [];
 
   initAllArray(): void {
     this.AllArray.push(this.todo);
@@ -67,6 +79,11 @@ export class AppComponent implements OnInit {
     this.localSercive.savetoLocal(this.AllArray);
 
   }
+
+  navigateToBoard(boardId: number) {
+    // Tıklanan boardun Id'siyle beraber yönlendirmeyi yapalım
+    this.router.navigate(['/board', boardId]);  }
+
 
   createNewColumn() {
     let tempColumn: Column = {
@@ -81,6 +98,25 @@ export class AppComponent implements OnInit {
 
   }
 
+
+  createNewBoard()
+  {
+
+    let tempBoard: Board = {
+      boardtitle: this.boardTitle,
+      arrayColumn: [],
+    }
+
+    this.boardTitle = '',
+    this.AllBoard.push(tempBoard);
+
+
+    this.localSercive.savetoLocal(this.AllArray);
+
+    this.initAllTitles();
+
+  }
+
   initAllTitles() {
     this.AllArray.forEach((e) => {
       this.allTitle.push(e.columnTitle);
@@ -88,4 +124,8 @@ export class AppComponent implements OnInit {
     this.localSercive.savetoLocal(this.AllArray);
 
   }
+
+
+
+
 }

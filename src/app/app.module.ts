@@ -21,12 +21,17 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatDialog, MAT_DIALOG_DATA, MatDialogModule} from '@angular/material/dialog';
 import { DialogComponentComponent } from './dialog-component/dialog-component.component';
 import { ColumnComponent } from './column/column.component';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatListModule} from '@angular/material/list';
+import { NerBoardComponent } from './ner-board/ner-board.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     DialogComponentComponent,
-      ColumnComponent
+      ColumnComponent,
+      NerBoardComponent,
    ],
   imports: [
     BrowserModule,
@@ -36,6 +41,8 @@ import { ColumnComponent } from './column/column.component';
     FormsModule,
     MatFormFieldModule, MatInputModule, FormsModule, NgIf, MatButtonModule, MatIconModule,
     MatDialogModule,
+    MatSidenavModule,
+    MatListModule
   ],
   providers: [],
   bootstrap: [AppComponent]

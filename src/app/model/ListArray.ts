@@ -1,3 +1,8 @@
+export interface Board {
+  boardtitle : string ;
+  arrayColumn : Column[];
+}
+
 export interface Column {
   columnTitle: string;
   array: ListItem[];
@@ -9,3 +14,4 @@ export interface ListItem {
   editingTitle? : string;
   isEditing? : boolean;
 }
+/*  */
