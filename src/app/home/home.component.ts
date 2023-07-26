@@ -6,20 +6,22 @@ import { Board, Column } from '../model/ListArray';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css'],
 })
 export class HomeComponent {
-  AllArray: Column[] = [];
-  AllBoard : Board[] = [];
-
-  constructor(private localSercive : LocalServiceService,private router : Router,private Router : ActivatedRoute) {}
+  AllBoards: Board[] = [];
+  currentBoard: Board;
+  constructor(
+    private localSercive: LocalServiceService,
+    private router: Router,
+    private Router: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
-    let getParamId = this.Router.snapshot.paramMap.get('boardId');
-    console.log(getParamId, 'getparamid#');
-
-    let returnedData = this.localSercive.getFromLocal();
-    if (returnedData.length <= 0) {
+    let paramId = this.Router.snapshot.paramMap.get('boardId');
+    this.AllBoards = this.localSercive.getFromLocal();
+    this.currentBoard = this.AllBoards[Number(paramId)];
+    if (this.AllBoards.length <= 0) {
       this.initAllBoards();
     }
     this.initAllTitles();
@@ -27,20 +29,20 @@ export class HomeComponent {
 
   allTitle: string[] = [];
   columnTitle: string = '';
-  boardTitle : string = '';
+  boardTitle: string = '';
 
   todo: Column = {
     columnTitle: 'TO-DO',
     array: [
       {
         title: 'Projeyi yap',
-        editingTitle : '',
-        isEditing : false
+        editingTitle: '',
+        isEditing: false,
       },
       {
         title: 'Projeyi yapma',
-        editingTitle : '',
-        isEditing : false
+        editingTitle: '',
+        isEditing: false,
       },
     ],
   };
@@ -49,81 +51,69 @@ export class HomeComponent {
     columnTitle: 'Doing',
     array: [
       {
-
         title: 'Projeyi yaptim',
-        editingTitle : '',
-  isEditing : false
+        editingTitle: '',
+        isEditing: false,
       },
       {
         title: 'Projeyi yapmadim',
-        editingTitle : '',
-  isEditing : false
+        editingTitle: '',
+        isEditing: false,
       },
     ],
   };
 
-
-
-  initAllArray(): void {
-    this.AllArray.push(this.todo);
-    this.AllArray.push(this.done);
-    this.localSercive.savetoLocal(this.AllArray);
-
-  }
-
   initAllBoards(): void {
     // Boş bir sütun dizisi ile boardları başlat
-    this.AllBoard.push({ id: 1, boardtitle: 'Board 1', arrayColumn: [] });
-    this.AllBoard.push({ id: 2, boardtitle: 'Board 2', arrayColumn: [] });
-    this.localSercive.savetoLocal(this.AllBoard);
+    this.AllBoards.push({
+      id: 0,
+      boardtitle: 'Board 1',
+      arrayColumn: [this.todo, this.done],
+    });
+    this.AllBoards.push({
+      id: 1,
+      boardtitle: 'Board 2',
+      arrayColumn: [this.todo, this.done],
+    });
+    this.localSercive.savetoLocal(this.AllBoards);
   }
 
   navigateToBoard(boardId: number) {
     // Tıklanan boardun Id'siyle beraber yönlendirmeyi yapalım
-    this.router.navigate(['/board', boardId]);
-
-
+    this.router.navigate(['/board', boardId]).then(() => {
+      window.location.reload();
+    });
   }
 
-
-  createNewColumn(id: number) {
+  createNewColumn() {
     let tempColumn: Column = {
       columnTitle: this.columnTitle,
-      array: []
+      array: [],
     };
 
-    
     this.columnTitle = '';
-    board.arrayColumn.push(tempColumn); // Sütunu belirli bir boarda ekle
-    this.localSercive.savetoLocal(this.AllBoard);
+    this.currentBoard.arrayColumn.push(tempColumn); // Sütunu belirli bir boarda ekle
+    this.localSercive.savetoLocal(this.AllBoards);
     this.initAllTitles(); // initAlltitles hata veriyor
   }
 
-
-
-  createNewBoard()
-  {
-
+  createNewBoard() {
     let tempBoard: Board = {
-      id: this.AllBoard.length + 1, // Yeni bir ID ata
+      id: this.AllBoards.length, // Yeni bir ID ata
       boardtitle: this.boardTitle,
-      arrayColumn: []
+      arrayColumn: [],
     };
 
     this.boardTitle = '';
-    this.AllBoard.push(tempBoard);
-    this.localSercive.savetoLocal(this.AllBoard);
+    this.AllBoards.push(tempBoard);
+    this.localSercive.savetoLocal(this.AllBoards);
     this.initAllTitles();
-
   }
 
   initAllTitles() {
-    this.AllArray.forEach((e) => {
+    this.currentBoard.arrayColumn.forEach((e) => {
       this.allTitle.push(e.columnTitle);
     });
-    this.localSercive.savetoLocal(this.AllArray);
-
+    this.localSercive.savetoLocal(this.AllBoards);
   }
-
-
 }

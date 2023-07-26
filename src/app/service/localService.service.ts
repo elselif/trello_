@@ -1,34 +1,26 @@
 import { Injectable } from '@angular/core';
-import { Column } from '../model/ListArray';
+import { Board, Column } from '../model/ListArray';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class LocalServiceService {
-constructor() { }
+  constructor() {}
 
+  savetoLocal(data: any) {
+    let allBoards = JSON.stringify(data);
 
-
-savetoLocal(data:any)
-{
-  let kaydedilecek = JSON.stringify(data);
-
-  localStorage.setItem('allArray',kaydedilecek);
-}
-
-  getFromLocal(): Column[] {
-    let item = localStorage.getItem('allArray');
-
-    if (item) {
-
-    let parsedItem = JSON.parse(item);
-      return parsedItem;
+    localStorage.setItem('allBoards', allBoards);
   }
 
+  getFromLocal(): Board[] {
+    let item = localStorage.getItem('allBoards');
 
-  return [];
-}
+    if (item) {
+      let parsedItem = JSON.parse(item);
+      return parsedItem;
+    }
 
-
-
+    return [];
+  }
 }
