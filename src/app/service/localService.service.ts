@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Column } from '../model/ListArray';
+import { Board, Column } from '../model/ListArray';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +16,7 @@ savetoLocal(data:any)
   localStorage.setItem('allBoard',kaydedilecek);
 }
 
-  getFromLocal(): Column[] {
+  getFromLocal(): Board[] {
     let item = localStorage.getItem('allBoard');
 
     if (item) {

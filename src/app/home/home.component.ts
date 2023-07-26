@@ -66,12 +66,6 @@ export class HomeComponent {
 
 
 
-  initAllArray(): void {
-    this.AllArray.push(this.todo);
-    this.AllArray.push(this.done);
-    this.localSercive.savetoLocal(this.AllArray);
-
-  }
 
   initAllBoards(): void {
     // Boş bir sütun dizisi ile boardları başlat
@@ -82,7 +76,9 @@ export class HomeComponent {
 
   navigateToBoard(boardId: number) {
     // Tıklanan boardun Id'siyle beraber yönlendirmeyi yapalım
-    this.router.navigate(['/board', boardId]);
+    this.router.navigate(['/board', boardId]).then(() => {
+      window.location.reload();
+    });
 
 
   }
@@ -118,13 +114,14 @@ export class HomeComponent {
 
   }
 
+
+
+
   initAllTitles() {
-    this.AllArray.forEach((e) => {
+    this.currentBoard.arrayColumn.forEach((e) => {
       this.allTitle.push(e.columnTitle);
     });
-    this.localSercive.savetoLocal(this.AllArray);
-
+    this.localSercive.savetoLocal(this.AllBoard);
   }
-
 
 }

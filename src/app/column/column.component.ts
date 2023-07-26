@@ -4,7 +4,7 @@ import {
   transferArrayItem,
 } from '@angular/cdk/drag-drop';
 import { Component, Input, OnInit } from '@angular/core';
-import { Column, ListItem } from '../model/ListArray';
+import { Board, Column, ListItem } from '../model/ListArray';
 import { LocalServiceService } from '../service/localService.service';
 
 @Component({
@@ -26,6 +26,7 @@ export class ColumnComponent implements OnInit {
   @Input() ifState: boolean = false;
   @Input() Column: Column;
   @Input() AllArray: Column[];
+  @Input() AllBoard: Board[];
 
   drop(event: CdkDragDrop<Column>) {
     if (event.previousContainer === event.container) {
