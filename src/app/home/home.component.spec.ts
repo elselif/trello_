@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { NerBoardComponent } from './ner-board.component';
+import { HomeComponent } from './home.component';
 
-describe('NerBoardComponent', () => {
-  let component: NerBoardComponent;
-  let fixture: ComponentFixture<NerBoardComponent>;
+describe('HomeComponent', () => {
+  let component: HomeComponent;
+  let fixture: ComponentFixture<HomeComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [NerBoardComponent]
+      declarations: [HomeComponent]
     });
-    fixture = TestBed.createComponent(NerBoardComponent);
+    fixture = TestBed.createComponent(HomeComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

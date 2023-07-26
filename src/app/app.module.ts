@@ -23,7 +23,7 @@ import { DialogComponentComponent } from './dialog-component/dialog-component.co
 import { ColumnComponent } from './column/column.component';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatListModule} from '@angular/material/list';
-import { NerBoardComponent } from './ner-board/ner-board.component';
+import { HomeComponent } from './home/home.component';
 
 
 @NgModule({
@@ -31,7 +31,7 @@ import { NerBoardComponent } from './ner-board/ner-board.component';
     AppComponent,
     DialogComponentComponent,
       ColumnComponent,
-      NerBoardComponent,
+      HomeComponent,
    ],
   imports: [
     BrowserModule,

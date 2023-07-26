@@ -1,4 +1,5 @@
 export interface Board {
+  id : number ;
   boardtitle : string ;
   arrayColumn : Column[];
 }
