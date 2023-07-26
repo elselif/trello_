@@ -1,1 +1,15 @@
-<router-outlet></router-outlet>
+<div [class]="(presentTheme$ | async)">
+
+  <header>
+    <app-header>
+      <a *ngIf="isDarkEnable" (click)="changeTheme()" mode-button style="font-size:30px">😎</a>
+      <a *ngIf="!isDarkEnable" (click)="changeTheme()" mode-button style="font-size:30px">😁</a>
+    </app-header>
+  </header>
+
+
+  <main>
+    <router-outlet></router-outlet>
+  </main>
+
+</div>

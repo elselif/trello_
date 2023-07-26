@@ -4,6 +4,7 @@
   margin: 0 25px 25px 0;
   display: inline-block;
   vertical-align: top;
+  background: var(--header-color);
 }
 
 .example-list {
@@ -13,6 +14,7 @@
   border-radius: 4px;
   overflow: hidden;
   display: block;
+  background: var(--header-color);
 }
 
 .example-box {
@@ -25,8 +27,9 @@
   justify-content: space-between;
   box-sizing: border-box;
   cursor: move;
-  background: white;
-  font-size: 14px;
+  background: var(--header-color);
+    font-size: 14px;
+
 }
 
 .cdk-drag-preview {
@@ -47,12 +50,15 @@
 
 .example-box:last-child {
   border: none;
+  background: var(--header-color);
 }
 
 .example-list.cdk-drop-list-dragging .example-box:not(.cdk-drag-placeholder) {
   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+  background: var(--header-color);
 }
 .example-form-field {
   width: 200px;
+  background: var(--header-color);
 }
 

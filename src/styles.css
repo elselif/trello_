@@ -5,3 +5,24 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+.theme-light {
+  --primary: #2577c1;
+  --secondary-bg: #fff;
+  --theme: #fff;
+  --header-color: rgb(194, 63, 226);
+  --route-link-active: #fff;
+  --link-color: rgb(85, 80, 80);
+  --border-color: rgb(85, 80, 80);
+}
+
+.theme-dark {
+  --primary: rgb(255, 80, 11);
+  --secondary-bg: #424242;
+  --theme: #424242;
+  --header-color: var(--theme);
+  --route-link-active: rgb(255, 80, 11);
+  --link-color: #fff;
+  --border-color: rgb(28, 214, 28);
+}

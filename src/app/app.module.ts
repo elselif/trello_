@@ -24,6 +24,7 @@ import { ColumnComponent } from './column/column.component';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatListModule} from '@angular/material/list';
 import { HomeComponent } from './home/home.component';
+import { HeaderComponent } from './header/header.component';
 
 
 @NgModule({
@@ -32,6 +33,7 @@ import { HomeComponent } from './home/home.component';
     DialogComponentComponent,
       ColumnComponent,
       HomeComponent,
+      HeaderComponent,
    ],
   imports: [
     BrowserModule,

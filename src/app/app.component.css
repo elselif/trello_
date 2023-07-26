@@ -61,5 +61,19 @@
           margin: 10px;
           border: 1px solid #555;
         }
+        header {
+          display: flex;
+          justify-content: space-around;
+          background: var(--header-color);
+        }
 
+        main {
+          height: calc(100vh - 80px);
+          border: 2px solid var(--border-color);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: var(--primary);
+          background-color: var(--secondary-bg);
+        }
 
