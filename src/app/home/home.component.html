@@ -40,8 +40,17 @@
       </div>
 
       <div class="grid grid-cols-2 flex row aling-items-center">
-        <div *ngFor="let item of AllArray; let i = index" style="display: flex; flex-direction: column; margin: 0 50px">
-          <app-column [ifState]="true" [AllArray]="AllArray" [Column]="AllArray[i]" [allTitle]="allTitle"></app-column>
+        <div
+          *ngFor="let item of currentBoard.arrayColumn; let i = index"
+          style="display: flex; flex-direction: column; margin: 0 50px"
+        >
+          <app-column
+            [ifState]="true"
+            [AllArray]="currentBoard.arrayColumn"
+            [Column]="currentBoard.arrayColumn[i]"
+            [allTitle]="allTitle"
+            [AllBoard]="AllBoard"
+          ></app-column>
         </div>
       </div>
     </div>

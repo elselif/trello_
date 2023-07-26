@@ -13,11 +13,11 @@ savetoLocal(data:any)
 {
   let kaydedilecek = JSON.stringify(data);
 
-  localStorage.setItem('allArray',kaydedilecek);
+  localStorage.setItem('allBoard',kaydedilecek);
 }
 
   getFromLocal(): Column[] {
-    let item = localStorage.getItem('allArray');
+    let item = localStorage.getItem('allBoard');
 
     if (item) {
 

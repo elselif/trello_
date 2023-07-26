@@ -9,20 +9,22 @@ import { Board, Column } from '../model/ListArray';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
-  AllArray: Column[] = [];
   AllBoard : Board[] = [];
-
+  currentBoard : Board;
   constructor(private localSercive : LocalServiceService,private router : Router,private Router : ActivatedRoute) {}
 
-  ngOnInit(): void {
-    let getParamId = this.Router.snapshot.paramMap.get('boardId');
-    console.log(getParamId, 'getparamid#');
 
-    let returnedData = this.localSercive.getFromLocal();
-    if (returnedData.length <= 0) {
+  ngOnInit(): void {
+
+
+    let paramId = this.Router.snapshot.paramMap.get('boardId');
+    this.AllBoard = this.localSercive.getFromLocal();
+    this.currentBoard = this.AllBoard[Number(paramId)];
+    if (this.AllBoard.length <= 0) {
       this.initAllBoards();
     }
     this.initAllTitles();
+
   }
 
   allTitle: string[] = [];
@@ -52,12 +54,12 @@ export class HomeComponent {
 
         title: 'Projeyi yaptim',
         editingTitle : '',
-  isEditing : false
+        isEditing : false
       },
       {
         title: 'Projeyi yapmadim',
         editingTitle : '',
-  isEditing : false
+        isEditing : false
       },
     ],
   };
@@ -86,15 +88,14 @@ export class HomeComponent {
   }
 
 
-  createNewColumn(id: number) {
+  createNewColumn() {
     let tempColumn: Column = {
       columnTitle: this.columnTitle,
-      array: []
+      array: [],
     };
 
-    
     this.columnTitle = '';
-    board.arrayColumn.push(tempColumn); // Sütunu belirli bir boarda ekle
+    this.currentBoard.arrayColumn.push(tempColumn); // Sütunu belirli bir boarda ekle
     this.localSercive.savetoLocal(this.AllBoard);
     this.initAllTitles(); // initAlltitles hata veriyor
   }
