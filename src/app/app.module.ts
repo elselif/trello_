@@ -19,7 +19,6 @@ import {NgIf} from '@angular/common';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatDialog, MAT_DIALOG_DATA, MatDialogModule} from '@angular/material/dialog';
-import { DialogComponentComponent } from './dialog-component/dialog-component.component';
 import { ColumnComponent } from './column/column.component';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatListModule} from '@angular/material/list';
@@ -30,7 +29,6 @@ import { HeaderComponent } from './header/header.component';
 @NgModule({
   declarations: [
     AppComponent,
-    DialogComponentComponent,
       ColumnComponent,
       HomeComponent,
       HeaderComponent,
