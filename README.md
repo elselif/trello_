@@ -29,4 +29,6 @@ Run the server
 
 ## Screenshot
 
-![Uygulama Ekran Görüntüsü](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+![](light-theme.png)
+![](dark-theme.png)
+![](dark-theme-show.png)
