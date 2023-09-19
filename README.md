@@ -29,6 +29,6 @@ Run the server
 
 ## Screenshot
 
-![](light-theme.png)
-![](dark-theme.png)
-![](dark-theme-show.png)
+![](light-theme.PNG)
+![](dark-theme.PNG)
+![](dark-theme-show.PNG)
